@@ -32,6 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	cowinv1 "kube-vaccine/api/v1"
+	cowinv2 "kube-vaccine/api/v2"
 	"kube-vaccine/controllers"
 	//+kubebuilder:scaffold:imports
 )
@@ -45,6 +46,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(cowinv1.AddToScheme(scheme))
+	utilruntime.Must(cowinv2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
