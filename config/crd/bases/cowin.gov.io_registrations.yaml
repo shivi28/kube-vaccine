@@ -35,15 +35,15 @@ spec:
           spec:
             description: RegistrationSpec defines the desired state of Registration
             properties:
-              appointment_date:
-                type: string
               name:
+                type: string
+              registration_date:
                 type: string
               verified_id:
                 type: string
             required:
-            - appointment_date
             - name
+            - registration_date
             - verified_id
             type: object
           status:
@@ -74,17 +74,17 @@ spec:
           spec:
             description: RegistrationSpec defines the desired state of Registration
             properties:
-              appointment_date:
-                type: string
               name:
+                type: string
+              registration_date:
                 type: string
               vaccine_name:
                 type: string
               verified_id:
                 type: string
             required:
-            - appointment_date
             - name
+            - registration_date
             - vaccine_name
             - verified_id
             type: object
@@ -123,12 +123,12 @@ spec:
                   description: VaccineDetail defines vaccine details like name and
                     registration date
                   properties:
-                    appointment_date:
+                    registration_date:
                       type: string
                     vaccine_name:
                       type: string
                   required:
-                  - appointment_date
+                  - registration_date
                   - vaccine_name
                   type: object
                 type: array

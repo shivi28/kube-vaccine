@@ -24,7 +24,7 @@ import (
 type RegistrationSpec struct {
 	Name             string `json:"name"`
 	VerifiedID       string `json:"verified_id"`
-	RegistrationDate string `json:"appointment_date"`
+	RegistrationDate string `json:"registration_date"`
 }
 
 // RegistrationStatus defines the observed state of Registration

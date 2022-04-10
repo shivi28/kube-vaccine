@@ -29,7 +29,7 @@ type RegistrationSpec struct {
 
 // VaccineDetail defines vaccine details like name and registration date
 type VaccineDetail struct {
-	RegistrationDate string `json:"appointment_date"`
+	RegistrationDate string `json:"registration_date"`
 	VaccineName      string `json:"vaccine_name"`
 }
 
