@@ -33,6 +33,7 @@ import (
 
 	cowinv1 "kube-vaccine/api/v1"
 	cowinv2 "kube-vaccine/api/v2"
+	cowinv3 "kube-vaccine/api/v3"
 	"kube-vaccine/controllers"
 	//+kubebuilder:scaffold:imports
 )
@@ -47,6 +48,7 @@ func init() {
 
 	utilruntime.Must(cowinv1.AddToScheme(scheme))
 	utilruntime.Must(cowinv2.AddToScheme(scheme))
+	utilruntime.Must(cowinv3.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 

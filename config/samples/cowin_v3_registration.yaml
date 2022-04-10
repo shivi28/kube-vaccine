@@ -1,0 +1,6 @@
+apiVersion: cowin.gov.io/v3
+kind: Registration
+metadata:
+  name: registration-sample
+spec:
+  # TODO(user): Add fields here

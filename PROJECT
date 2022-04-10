@@ -21,4 +21,12 @@ resources:
   kind: Registration
   path: kube-vaccine/api/v2
   version: v2
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: gov.io
+  group: cowin
+  kind: Registration
+  path: kube-vaccine/api/v3
+  version: v3
 version: "3"
