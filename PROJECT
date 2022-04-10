@@ -21,6 +21,9 @@ resources:
   kind: Registration
   path: kube-vaccine/api/v2
   version: v2
+  webhooks:
+    conversion: true
+    webhookVersion: v1
 - api:
     crdVersion: v1
     namespaced: true

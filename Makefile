@@ -1,3 +1,4 @@
+CRD_OPTIONS ?= "crd:trivialVersions=false"
 
 # Image URL to use all building/pushing image targets
 IMG ?= controller:latest
