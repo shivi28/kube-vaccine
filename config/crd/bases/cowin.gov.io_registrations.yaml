@@ -120,6 +120,8 @@ spec:
                 type: string
               vaccine_details:
                 items:
+                  description: VaccineDetail defines vaccine details like name and
+                    registration date
                   properties:
                     appointment_date:
                       type: string

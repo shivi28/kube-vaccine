@@ -40,7 +40,7 @@ help: ## Display this help.
 ##@ Development
 
 .PHONY: manifests
-manifests: controller-gen ## Generate WebhookConfiguration, ClusterRole and CustomResourceDefinition objects.
+manifests: controller-gen  conversion-gen## Generate WebhookConfiguration, ClusterRole and CustomResourceDefinition objects.
 	$(CONTROLLER_GEN) rbac:roleName=manager-role crd webhook paths="./..." output:crd:artifacts:config=config/crd/bases
 	kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml
 
@@ -105,6 +105,11 @@ CONTROLLER_GEN = $(shell pwd)/bin/controller-gen
 .PHONY: controller-gen
 controller-gen: ## Download controller-gen locally if necessary.
 	$(call go-get-tool,$(CONTROLLER_GEN),sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0)
+
+CONVERSION_GEN = $(shell pwd)/bin/conversion-gen
+.PHONY: conversion-gen
+conversion-gen: ## Download conversion-gen locally if necessary.
+	$(call go-get-tool,$(CONVERSION_GEN), k8s.io/code-generator/cmd/conversion-gen)
 
 KUSTOMIZE = $(shell pwd)/bin/kustomize
 .PHONY: kustomize
