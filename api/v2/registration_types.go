@@ -34,6 +34,7 @@ type RegistrationStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Registration is the Schema for the registrations API
 type Registration struct {

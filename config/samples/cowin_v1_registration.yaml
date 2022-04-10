@@ -1,6 +1,9 @@
 apiVersion: cowin.gov.io/v1
 kind: Registration
 metadata:
-  name: registration-sample
+  name: registration-sample-v1
 spec:
-  # TODO(user): Add fields here
+  name: "shivani"
+  verified_id: "shivani-id-1"
+  registration_date: "today"
+
