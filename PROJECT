@@ -1,0 +1,16 @@
+domain: gov.io
+layout:
+- go.kubebuilder.io/v3
+projectName: kube-vaccine
+repo: kube-vaccine
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: gov.io
+  group: cowin
+  kind: Registration
+  path: kube-vaccine/api/v1
+  version: v1
+version: "3"

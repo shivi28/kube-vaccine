@@ -1,0 +1,20 @@
+# permissions for end users to view registrations.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: registration-viewer-role
+rules:
+- apiGroups:
+  - cowin.gov.io
+  resources:
+  - registrations
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - cowin.gov.io
+  resources:
+  - registrations/status
+  verbs:
+  - get
