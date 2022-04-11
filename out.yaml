@@ -1,0 +1,19 @@
+{
+    "apiVersion": "cowin.gov.io/v1",
+    "kind": "Registration",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"cowin.gov.io/v3\",\"kind\":\"Registration\",\"metadata\":{\"annotations\":{},\"name\":\"registration-sample-v3\",\"namespace\":\"default\"},\"spec\":{\"name\":\"shivani\",\"vaccine_details\":[{\"registration_date\":\"01-07-2021\",\"vaccine_name\":\"covaxin\"},{\"registration_date\":\"01-06-2021\",\"vaccine_name\":\"covaxin\"}],\"verified_id\":\"shivani-id-1\"}}\n"
+        },
+        "creationTimestamp": "2022-04-11T19:42:59Z",
+        "generation": 1,
+        "name": "registration-sample-v3",
+        "namespace": "default",
+        "resourceVersion": "9569",
+        "uid": "6256b026-3dc3-4784-933c-43cb70677da4"
+    },
+    "spec": {
+        "name": "shivani",
+        "verified_id": "shivani-id-1"
+    }
+}

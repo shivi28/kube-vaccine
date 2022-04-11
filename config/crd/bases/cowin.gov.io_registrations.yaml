@@ -35,23 +35,19 @@ spec:
           spec:
             description: RegistrationSpec defines the desired state of Registration
             properties:
-              appointment_date:
-                type: string
               name:
+                type: string
+              registration_date:
                 type: string
               verified_id:
                 type: string
-            required:
-            - appointment_date
-            - name
-            - verified_id
             type: object
           status:
             description: RegistrationStatus defines the observed state of Registration
             type: object
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - name: v2
@@ -74,19 +70,14 @@ spec:
           spec:
             description: RegistrationSpec defines the desired state of Registration
             properties:
-              appointment_date:
-                type: string
               name:
+                type: string
+              registration_date:
                 type: string
               vaccine_name:
                 type: string
               verified_id:
                 type: string
-            required:
-            - appointment_date
-            - name
-            - vaccine_name
-            - verified_id
             type: object
           status:
             description: RegistrationStatus defines the observed state of Registration
@@ -120,29 +111,24 @@ spec:
                 type: string
               vaccine_details:
                 items:
+                  description: VaccineDetail defines vaccine details like name and
+                    registration date
                   properties:
-                    appointment_date:
+                    registration_date:
                       type: string
                     vaccine_name:
                       type: string
-                  required:
-                  - appointment_date
-                  - vaccine_name
                   type: object
                 type: array
               verified_id:
                 type: string
-            required:
-            - name
-            - vaccine_details
-            - verified_id
             type: object
           status:
             description: RegistrationStatus defines the observed state of Registration
             type: object
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}
 status:

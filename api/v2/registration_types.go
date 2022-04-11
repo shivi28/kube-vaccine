@@ -22,10 +22,10 @@ import (
 
 // RegistrationSpec defines the desired state of Registration
 type RegistrationSpec struct {
-	Name             string `json:"name"`
-	VerifiedID       string `json:"verified_id"`
-	RegistrationDate string `json:"appointment_date"`
-	VaccineName      string `json:"vaccine_name"`
+	Name             string `json:"name,omitempty"`
+	VerifiedID       string `json:"verified_id,omitempty"`
+	RegistrationDate string `json:"registration_date,omitempty"`
+	VaccineName      string `json:"vaccine_name,omitempty"`
 }
 
 // RegistrationStatus defines the observed state of Registration

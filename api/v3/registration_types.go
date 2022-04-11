@@ -22,15 +22,15 @@ import (
 
 // RegistrationSpec defines the desired state of Registration
 type RegistrationSpec struct {
-	Name           string           `json:"name"`
-	VerifiedID     string           `json:"verified_id"`
-	VaccineDetails []*VaccineDetail `json:"vaccine_details"`
+	Name           string           `json:"name,omitempty"`
+	VerifiedID     string           `json:"verified_id,omitempty"`
+	VaccineDetails []*VaccineDetail `json:"vaccine_details,omitempty"`
 }
 
 // VaccineDetail defines vaccine details like name and registration date
 type VaccineDetail struct {
-	RegistrationDate string `json:"appointment_date"`
-	VaccineName      string `json:"vaccine_name"`
+	RegistrationDate string `json:"registration_date,omitempty"`
+	VaccineName      string `json:"vaccine_name,omitempty"`
 }
 
 // RegistrationStatus defines the observed state of Registration
@@ -39,6 +39,7 @@ type RegistrationStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Registration is the Schema for the registrations API
 type Registration struct {
