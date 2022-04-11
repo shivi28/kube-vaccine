@@ -5,6 +5,8 @@ metadata:
 spec:
   name: shivani
   vaccine_details:
-    - registration_date: today
-      vaccine_name: covaxin
+    - registration_date: "today"
+      vaccine_name: "covaxin"
+    - registration_date: "12-14-65"
+      vaccine_name: "sputnik"
   verified_id: shivani-id-1

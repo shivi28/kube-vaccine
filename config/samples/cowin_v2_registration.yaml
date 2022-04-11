@@ -1,9 +1,9 @@
 apiVersion: cowin.gov.io/v2
 kind: Registration
 metadata:
-  name: registration-sample-v2-newer
+  name: registration-sample-v2-test
 spec:
-  name: "shivani"
-  verified_id: "shivani-id-1"
-  registration_date: "today"
-  vaccine_name: "covaxin"
+  name: "shivani2"
+  verified_id: "shivani-id-2"
+  registration_date: "12-13-2021"
+  vaccine_name: "pfizer"

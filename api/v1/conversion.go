@@ -2,6 +2,7 @@ package v1
 
 import (
 	"encoding/json"
+	"fmt"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conv "k8s.io/apimachinery/pkg/conversion"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -26,7 +27,8 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 	setupLog.Info("CONVERT TO1", "dst", dst)
 	setupLog.Info("CONVERT TO1", "restored", restored)
 
-	if ok, err := UnmarshalData(src, restored); err != nil || !ok {
+	ok, err := UnmarshalData(src, restored)
+	if err != nil {
 		return err
 	}
 
@@ -39,10 +41,13 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 	//fmt.Printf("2 dst.Spec.Name,dst.Spec.VerifiedID,dst.Spec.RegistrationDate,dst.Spec.VaccineName : %+v %+v %+v %+v", dst.Spec.Name, dst.Spec.VerifiedID, dst.Spec.RegistrationDate, dst.Spec.VaccineName)
 	//fmt.Printf("2 restored.Spec.Name,restored.Spec.VerifiedID,restored.Spec.RegistrationDate,restored.Spec.VaccineName : %+v %+v %+v %+v", restored.Spec.Name, restored.Spec.VerifiedID, restored.Spec.RegistrationDate, restored.Spec.VaccineName)
 
-	if len(restored.Spec.VaccineName) == 0 {
-		dst.Spec.VaccineName = "COVISHIELD"
-	} else {
+	if ok == true {
+		if restored.Spec.VaccineName == "" {
+			return fmt.Errorf("Vaccine name cannot be empty in v2")
+		}
 		dst.Spec.VaccineName = restored.Spec.VaccineName
+	} else {
+		dst.Spec.VaccineName = "COVISHIELD"
 	}
 
 	setupLog.Info("\n\n ConvertTo called Ended v1-->v2 \n\n ")
@@ -75,7 +80,7 @@ func Convert_v2_RegistrationSpec_To_v1_RegistrationSpec(in *v2.RegistrationSpec,
 	return autoConvert_v2_RegistrationSpec_To_v1_RegistrationSpec(in, out, s)
 }
 
-const DataAnnotation = "kubectl.kubernetes.io/last-applied-configuration"
+const DataAnnotation = "cowin.gov.in/conversion-data"
 
 // MarshalData stores the source object as json data in the destination object annotations map.
 // It ignores the metadata of the source object.

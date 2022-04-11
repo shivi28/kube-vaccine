@@ -1,0 +1,18 @@
+apiVersion: cowin.gov.io/v1
+kind: Registration
+metadata:
+  annotations:
+    cowin.gov.in/conversion-data: '{"apiVersion":"cowin.gov.io/v2","kind":"Registration","spec":{"name":"shivani","registration_date":"today","vaccine_name":"covaxin","verified_id":"shivani-id-1"},"status":{}}'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"cowin.gov.io/v3","kind":"Registration","metadata":{"annotations":{},"name":"registration-sample-v3","namespace":"default"},"spec":{"name":"shivani","vaccine_details":[{"registration_date":"today","vaccine_name":"covaxin"},{"registration_date":"12-14-65","vaccine_name":"sputnik"}],"verified_id":"shivani-id-1"}}
+  creationTimestamp: "2022-04-11T07:05:04Z"
+  generation: 1
+  name: registration-sample-v3
+  namespace: default
+  resourceVersion: "62720"
+  uid: b103e5e5-cf9f-4811-af53-8ab67f1d0682
+spec:
+  name: shivani
+  registration_date: today
+  verified_id: shivani-id-1-updated
+status: {}

@@ -2,6 +2,7 @@ package v3
 
 import (
 	"encoding/json"
+	"fmt"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -50,25 +51,33 @@ func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
 
 	restored := &Registration{}
 
-	setupLog.Info("CONVERT TO1", "src", src)
-	setupLog.Info("CONVERT TO1", "dst", dst)
-	setupLog.Info("CONVERT TO1", "restored", restored)
+	setupLog.Info("ConvertFrom 1", "src", src)
+	setupLog.Info("ConvertFrom 1", "dst", dst)
+	setupLog.Info("ConvertFrom 1", "restored", restored)
 
-	if ok, err := UnmarshalData(src, restored); err != nil || !ok {
+	ok, err := UnmarshalData(src, restored)
+	if err != nil {
 		return err
 	}
-	if restored.Spec.VaccineDetails != nil {
+	if ok == true {
+		if restored.Spec.VaccineDetails == nil {
+			return fmt.Errorf("vaccine details should not be nil in v3")
+		}
 		dst.Spec.VaccineDetails = restored.Spec.VaccineDetails
 	} else {
-		dst.Spec.VaccineDetails = []*VaccineDetail{&VaccineDetail{
+		setupLog.Info("ConvertFrom 3", "src", src)
+		setupLog.Info("ConvertFrom 3", "dst", dst)
+		setupLog.Info("ConvertFrom 3", "restored", restored)
+		dst.Spec.VaccineDetails = make([]*VaccineDetail, 0)
+		dst.Spec.VaccineDetails = append(dst.Spec.VaccineDetails, &VaccineDetail{
 			VaccineName:      src.Spec.VaccineName,
 			RegistrationDate: src.Spec.RegistrationDate,
-		}}
+		})
 	}
 
-	setupLog.Info("CONVERT TO1", "src", src)
-	setupLog.Info("CONVERT TO1", "dst", dst)
-	setupLog.Info("CONVERT TO1", "restored", restored)
+	setupLog.Info("ConvertFrom 2", "src", src)
+	setupLog.Info("ConvertFrom 2", "dst", dst)
+	setupLog.Info("ConvertFrom 2", "restored", restored)
 
 	setupLog.Info("\n\n ConvertFrom ended from v2-->v3 \n\n ")
 	return nil
@@ -82,7 +91,7 @@ func Convert_v2_RegistrationSpec_To_v3_RegistrationSpec(in *v2.RegistrationSpec,
 	return autoConvert_v2_RegistrationSpec_To_v3_RegistrationSpec(in, out, s)
 }
 
-const DataAnnotation = "kubectl.kubernetes.io/last-applied-configuration"
+const DataAnnotation = "cowin.gov.in/conversion-data"
 
 // MarshalData stores the source object as json data in the destination object annotations map.
 // It ignores the metadata of the source object.
