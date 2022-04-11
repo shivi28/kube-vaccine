@@ -21,7 +21,7 @@ limitations under the License.
 package v1
 
 import (
-	v2 "kube-vaccine/api/v2"
+	v3 "kube-vaccine/api/v3"
 
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -34,88 +34,88 @@ func init() {
 // RegisterConversions adds conversion functions to the given scheme.
 // Public to allow building arbitrary schemes.
 func RegisterConversions(s *runtime.Scheme) error {
-	if err := s.AddGeneratedConversionFunc((*Registration)(nil), (*v2.Registration)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_Registration_To_v2_Registration(a.(*Registration), b.(*v2.Registration), scope)
+	if err := s.AddGeneratedConversionFunc((*Registration)(nil), (*v3.Registration)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_Registration_To_v3_Registration(a.(*Registration), b.(*v3.Registration), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*v2.Registration)(nil), (*Registration)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v2_Registration_To_v1_Registration(a.(*v2.Registration), b.(*Registration), scope)
+	if err := s.AddGeneratedConversionFunc((*v3.Registration)(nil), (*Registration)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v3_Registration_To_v1_Registration(a.(*v3.Registration), b.(*Registration), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*RegistrationList)(nil), (*v2.RegistrationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_RegistrationList_To_v2_RegistrationList(a.(*RegistrationList), b.(*v2.RegistrationList), scope)
+	if err := s.AddGeneratedConversionFunc((*RegistrationList)(nil), (*v3.RegistrationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RegistrationList_To_v3_RegistrationList(a.(*RegistrationList), b.(*v3.RegistrationList), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*v2.RegistrationList)(nil), (*RegistrationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v2_RegistrationList_To_v1_RegistrationList(a.(*v2.RegistrationList), b.(*RegistrationList), scope)
+	if err := s.AddGeneratedConversionFunc((*v3.RegistrationList)(nil), (*RegistrationList)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v3_RegistrationList_To_v1_RegistrationList(a.(*v3.RegistrationList), b.(*RegistrationList), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*RegistrationSpec)(nil), (*v2.RegistrationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_RegistrationSpec_To_v2_RegistrationSpec(a.(*RegistrationSpec), b.(*v2.RegistrationSpec), scope)
+	if err := s.AddGeneratedConversionFunc((*RegistrationSpec)(nil), (*v3.RegistrationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RegistrationSpec_To_v3_RegistrationSpec(a.(*RegistrationSpec), b.(*v3.RegistrationSpec), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*v2.RegistrationSpec)(nil), (*RegistrationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v2_RegistrationSpec_To_v1_RegistrationSpec(a.(*v2.RegistrationSpec), b.(*RegistrationSpec), scope)
+	if err := s.AddGeneratedConversionFunc((*v3.RegistrationSpec)(nil), (*RegistrationSpec)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v3_RegistrationSpec_To_v1_RegistrationSpec(a.(*v3.RegistrationSpec), b.(*RegistrationSpec), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*RegistrationStatus)(nil), (*v2.RegistrationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v1_RegistrationStatus_To_v2_RegistrationStatus(a.(*RegistrationStatus), b.(*v2.RegistrationStatus), scope)
+	if err := s.AddGeneratedConversionFunc((*RegistrationStatus)(nil), (*v3.RegistrationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v1_RegistrationStatus_To_v3_RegistrationStatus(a.(*RegistrationStatus), b.(*v3.RegistrationStatus), scope)
 	}); err != nil {
 		return err
 	}
-	if err := s.AddGeneratedConversionFunc((*v2.RegistrationStatus)(nil), (*RegistrationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
-		return Convert_v2_RegistrationStatus_To_v1_RegistrationStatus(a.(*v2.RegistrationStatus), b.(*RegistrationStatus), scope)
+	if err := s.AddGeneratedConversionFunc((*v3.RegistrationStatus)(nil), (*RegistrationStatus)(nil), func(a, b interface{}, scope conversion.Scope) error {
+		return Convert_v3_RegistrationStatus_To_v1_RegistrationStatus(a.(*v3.RegistrationStatus), b.(*RegistrationStatus), scope)
 	}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func autoConvert_v1_Registration_To_v2_Registration(in *Registration, out *v2.Registration, s conversion.Scope) error {
+func autoConvert_v1_Registration_To_v3_Registration(in *Registration, out *v3.Registration, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v1_RegistrationSpec_To_v2_RegistrationSpec(&in.Spec, &out.Spec, s); err != nil {
+	if err := Convert_v1_RegistrationSpec_To_v3_RegistrationSpec(&in.Spec, &out.Spec, s); err != nil {
 		return err
 	}
-	if err := Convert_v1_RegistrationStatus_To_v2_RegistrationStatus(&in.Status, &out.Status, s); err != nil {
+	if err := Convert_v1_RegistrationStatus_To_v3_RegistrationStatus(&in.Status, &out.Status, s); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Convert_v1_Registration_To_v2_Registration is an autogenerated conversion function.
-func Convert_v1_Registration_To_v2_Registration(in *Registration, out *v2.Registration, s conversion.Scope) error {
-	return autoConvert_v1_Registration_To_v2_Registration(in, out, s)
+// Convert_v1_Registration_To_v3_Registration is an autogenerated conversion function.
+func Convert_v1_Registration_To_v3_Registration(in *Registration, out *v3.Registration, s conversion.Scope) error {
+	return autoConvert_v1_Registration_To_v3_Registration(in, out, s)
 }
 
-func autoConvert_v2_Registration_To_v1_Registration(in *v2.Registration, out *Registration, s conversion.Scope) error {
+func autoConvert_v3_Registration_To_v1_Registration(in *v3.Registration, out *Registration, s conversion.Scope) error {
 	out.ObjectMeta = in.ObjectMeta
-	if err := Convert_v2_RegistrationSpec_To_v1_RegistrationSpec(&in.Spec, &out.Spec, s); err != nil {
+	if err := Convert_v3_RegistrationSpec_To_v1_RegistrationSpec(&in.Spec, &out.Spec, s); err != nil {
 		return err
 	}
-	if err := Convert_v2_RegistrationStatus_To_v1_RegistrationStatus(&in.Status, &out.Status, s); err != nil {
+	if err := Convert_v3_RegistrationStatus_To_v1_RegistrationStatus(&in.Status, &out.Status, s); err != nil {
 		return err
 	}
 	return nil
 }
 
-// Convert_v2_Registration_To_v1_Registration is an autogenerated conversion function.
-func Convert_v2_Registration_To_v1_Registration(in *v2.Registration, out *Registration, s conversion.Scope) error {
-	return autoConvert_v2_Registration_To_v1_Registration(in, out, s)
+// Convert_v3_Registration_To_v1_Registration is an autogenerated conversion function.
+func Convert_v3_Registration_To_v1_Registration(in *v3.Registration, out *Registration, s conversion.Scope) error {
+	return autoConvert_v3_Registration_To_v1_Registration(in, out, s)
 }
 
-func autoConvert_v1_RegistrationList_To_v2_RegistrationList(in *RegistrationList, out *v2.RegistrationList, s conversion.Scope) error {
+func autoConvert_v1_RegistrationList_To_v3_RegistrationList(in *RegistrationList, out *v3.RegistrationList, s conversion.Scope) error {
 	out.ListMeta = in.ListMeta
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
-		*out = make([]v2.Registration, len(*in))
+		*out = make([]v3.Registration, len(*in))
 		for i := range *in {
-			if err := Convert_v1_Registration_To_v2_Registration(&(*in)[i], &(*out)[i], s); err != nil {
+			if err := Convert_v1_Registration_To_v3_Registration(&(*in)[i], &(*out)[i], s); err != nil {
 				return err
 			}
 		}
@@ -125,18 +125,18 @@ func autoConvert_v1_RegistrationList_To_v2_RegistrationList(in *RegistrationList
 	return nil
 }
 
-// Convert_v1_RegistrationList_To_v2_RegistrationList is an autogenerated conversion function.
-func Convert_v1_RegistrationList_To_v2_RegistrationList(in *RegistrationList, out *v2.RegistrationList, s conversion.Scope) error {
-	return autoConvert_v1_RegistrationList_To_v2_RegistrationList(in, out, s)
+// Convert_v1_RegistrationList_To_v3_RegistrationList is an autogenerated conversion function.
+func Convert_v1_RegistrationList_To_v3_RegistrationList(in *RegistrationList, out *v3.RegistrationList, s conversion.Scope) error {
+	return autoConvert_v1_RegistrationList_To_v3_RegistrationList(in, out, s)
 }
 
-func autoConvert_v2_RegistrationList_To_v1_RegistrationList(in *v2.RegistrationList, out *RegistrationList, s conversion.Scope) error {
+func autoConvert_v3_RegistrationList_To_v1_RegistrationList(in *v3.RegistrationList, out *RegistrationList, s conversion.Scope) error {
 	out.ListMeta = in.ListMeta
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Registration, len(*in))
 		for i := range *in {
-			if err := Convert_v2_Registration_To_v1_Registration(&(*in)[i], &(*out)[i], s); err != nil {
+			if err := Convert_v3_Registration_To_v1_Registration(&(*in)[i], &(*out)[i], s); err != nil {
 				return err
 			}
 		}
@@ -146,45 +146,39 @@ func autoConvert_v2_RegistrationList_To_v1_RegistrationList(in *v2.RegistrationL
 	return nil
 }
 
-// Convert_v2_RegistrationList_To_v1_RegistrationList is an autogenerated conversion function.
-func Convert_v2_RegistrationList_To_v1_RegistrationList(in *v2.RegistrationList, out *RegistrationList, s conversion.Scope) error {
-	return autoConvert_v2_RegistrationList_To_v1_RegistrationList(in, out, s)
+// Convert_v3_RegistrationList_To_v1_RegistrationList is an autogenerated conversion function.
+func Convert_v3_RegistrationList_To_v1_RegistrationList(in *v3.RegistrationList, out *RegistrationList, s conversion.Scope) error {
+	return autoConvert_v3_RegistrationList_To_v1_RegistrationList(in, out, s)
 }
 
-func autoConvert_v1_RegistrationSpec_To_v2_RegistrationSpec(in *RegistrationSpec, out *v2.RegistrationSpec, s conversion.Scope) error {
+func autoConvert_v1_RegistrationSpec_To_v3_RegistrationSpec(in *RegistrationSpec, out *v3.RegistrationSpec, s conversion.Scope) error {
 	out.Name = in.Name
 	out.VerifiedID = in.VerifiedID
-	out.RegistrationDate = in.RegistrationDate
+	// WARNING: in.RegistrationDate requires manual conversion: does not exist in peer-type
 	return nil
 }
 
-// Convert_v1_RegistrationSpec_To_v2_RegistrationSpec is an autogenerated conversion function.
-func Convert_v1_RegistrationSpec_To_v2_RegistrationSpec(in *RegistrationSpec, out *v2.RegistrationSpec, s conversion.Scope) error {
-	return autoConvert_v1_RegistrationSpec_To_v2_RegistrationSpec(in, out, s)
-}
-
-func autoConvert_v2_RegistrationSpec_To_v1_RegistrationSpec(in *v2.RegistrationSpec, out *RegistrationSpec, s conversion.Scope) error {
+func autoConvert_v3_RegistrationSpec_To_v1_RegistrationSpec(in *v3.RegistrationSpec, out *RegistrationSpec, s conversion.Scope) error {
 	out.Name = in.Name
 	out.VerifiedID = in.VerifiedID
-	out.RegistrationDate = in.RegistrationDate
-	// WARNING: in.VaccineName requires manual conversion: does not exist in peer-type
+	// WARNING: in.VaccineDetails requires manual conversion: does not exist in peer-type
 	return nil
 }
 
-func autoConvert_v1_RegistrationStatus_To_v2_RegistrationStatus(in *RegistrationStatus, out *v2.RegistrationStatus, s conversion.Scope) error {
+func autoConvert_v1_RegistrationStatus_To_v3_RegistrationStatus(in *RegistrationStatus, out *v3.RegistrationStatus, s conversion.Scope) error {
 	return nil
 }
 
-// Convert_v1_RegistrationStatus_To_v2_RegistrationStatus is an autogenerated conversion function.
-func Convert_v1_RegistrationStatus_To_v2_RegistrationStatus(in *RegistrationStatus, out *v2.RegistrationStatus, s conversion.Scope) error {
-	return autoConvert_v1_RegistrationStatus_To_v2_RegistrationStatus(in, out, s)
+// Convert_v1_RegistrationStatus_To_v3_RegistrationStatus is an autogenerated conversion function.
+func Convert_v1_RegistrationStatus_To_v3_RegistrationStatus(in *RegistrationStatus, out *v3.RegistrationStatus, s conversion.Scope) error {
+	return autoConvert_v1_RegistrationStatus_To_v3_RegistrationStatus(in, out, s)
 }
 
-func autoConvert_v2_RegistrationStatus_To_v1_RegistrationStatus(in *v2.RegistrationStatus, out *RegistrationStatus, s conversion.Scope) error {
+func autoConvert_v3_RegistrationStatus_To_v1_RegistrationStatus(in *v3.RegistrationStatus, out *RegistrationStatus, s conversion.Scope) error {
 	return nil
 }
 
-// Convert_v2_RegistrationStatus_To_v1_RegistrationStatus is an autogenerated conversion function.
-func Convert_v2_RegistrationStatus_To_v1_RegistrationStatus(in *v2.RegistrationStatus, out *RegistrationStatus, s conversion.Scope) error {
-	return autoConvert_v2_RegistrationStatus_To_v1_RegistrationStatus(in, out, s)
+// Convert_v3_RegistrationStatus_To_v1_RegistrationStatus is an autogenerated conversion function.
+func Convert_v3_RegistrationStatus_To_v1_RegistrationStatus(in *v3.RegistrationStatus, out *RegistrationStatus, s conversion.Scope) error {
+	return autoConvert_v3_RegistrationStatus_To_v1_RegistrationStatus(in, out, s)
 }

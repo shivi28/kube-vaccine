@@ -1,3 +1,3 @@
-// Package v1
+// Package v2
 // +k8s:conversion-gen=kube-vaccine/api/v3
-package v1
+package v2
