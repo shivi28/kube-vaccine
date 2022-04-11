@@ -1,0 +1,16 @@
+apiVersion: cowin.gov.io/v1
+kind: Registration
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"cowin.gov.io/v2","kind":"Registration","spec":{"name":"shivani","registration_date":"today","vaccine_name":"covaxin","verified_id":"shivani-id-1"},"status":{}}'
+  creationTimestamp: "2022-04-11T04:37:20Z"
+  generation: 1
+  name: registration-sample-v2-newer
+  namespace: default
+  resourceVersion: "39295"
+  uid: becdfa9d-b1d0-488b-bc4b-7b79f2982eae
+spec:
+  name: shivani
+  registration_date: today
+  verified_id: shivani-id-1-updated
+status: {}

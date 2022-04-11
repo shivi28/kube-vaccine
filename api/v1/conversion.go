@@ -5,12 +5,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conv "k8s.io/apimachinery/pkg/conversion"
 	"k8s.io/apimachinery/pkg/runtime"
+	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 
 	v2 "kube-vaccine/api/v2"
 )
 
+var setupLog = ctrl.Log.WithName("setup")
+
 func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
+	setupLog.Info("ConvertTo called from v1-->v2 \n\n ")
 	dst := dstRaw.(*v2.Registration)
 
 	if err := Convert_v1_Registration_To_v2_Registration(src, dst, nil); err != nil {
@@ -18,9 +22,22 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 	}
 
 	restored := &v2.Registration{}
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO1", "dst", dst)
+	setupLog.Info("CONVERT TO1", "restored", restored)
+
 	if ok, err := UnmarshalData(src, restored); err != nil || !ok {
 		return err
 	}
+
+	//setupLog.Info("CONVERT TO", "key", fmt.Sprintf("2 dst.Spec.Name,dst.Spec.VerifiedID,dst.Spec.RegistrationDate,dst.Spec.VaccineName : %+v %+v %+v %+v", dst.Spec.Name, dst.Spec.VerifiedID, dst.Spec.RegistrationDate, dst.Spec.VaccineName))
+	//setupLog.Info("CONVERT TO", "key", fmt.Sprintf("2 restored.Spec.Name,restored.Spec.VerifiedID,restored.Spec.RegistrationDate,restored.Spec.VaccineName : %+v %+v %+v %+v", restored.Spec.Name, restored.Spec.VerifiedID, restored.Spec.RegistrationDate, restored.Spec.VaccineName))
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO2", "dst ", dst)
+	setupLog.Info("CONVERT TO2", "restored", restored)
+	//
+	//fmt.Printf("2 dst.Spec.Name,dst.Spec.VerifiedID,dst.Spec.RegistrationDate,dst.Spec.VaccineName : %+v %+v %+v %+v", dst.Spec.Name, dst.Spec.VerifiedID, dst.Spec.RegistrationDate, dst.Spec.VaccineName)
+	//fmt.Printf("2 restored.Spec.Name,restored.Spec.VerifiedID,restored.Spec.RegistrationDate,restored.Spec.VaccineName : %+v %+v %+v %+v", restored.Spec.Name, restored.Spec.VerifiedID, restored.Spec.RegistrationDate, restored.Spec.VaccineName)
 
 	if len(restored.Spec.VaccineName) == 0 {
 		dst.Spec.VaccineName = "COVISHIELD"
@@ -28,18 +45,29 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 		dst.Spec.VaccineName = restored.Spec.VaccineName
 	}
 
+	setupLog.Info("\n\n ConvertTo called Ended v1-->v2 \n\n ")
+
 	return nil
 }
 
 func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
+	setupLog.Info("ConvertFrom called from v2-->v1 \n\n ")
 	src := srcRaw.(*v2.Registration)
 	if err := Convert_v2_Registration_To_v1_Registration(src, dst, nil); err != nil {
 		return err
 	}
 
+	setupLog.Info("ConvertFrom1", "dst", dst)
+	setupLog.Info("ConvertFrom1", "src", src)
+
 	if err := MarshalData(src, dst); err != nil {
 		return err
 	}
+
+	setupLog.Info("ConvertFrom2", "dst", dst)
+	setupLog.Info("ConvertFrom2", "src", src)
+
+	setupLog.Info("\n\nConvertFrom ended from v2-->v1 \n")
 	return nil
 }
 

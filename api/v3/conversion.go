@@ -2,6 +2,7 @@ package v3
 
 import (
 	"encoding/json"
+	ctrl "sigs.k8s.io/controller-runtime"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conv "k8s.io/apimachinery/pkg/conversion"
@@ -10,12 +11,18 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 )
 
+var setupLog = ctrl.Log.WithName("setup")
+
 func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
+	setupLog.Info("ConvertTo called from v3-->v2 \n\n ")
 	dst := dstRaw.(*v2.Registration)
 
 	if err := Convert_v3_Registration_To_v2_Registration(src, dst, nil); err != nil {
 		return err
 	}
+
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO1", "dst", dst)
 
 	if err := MarshalData(src, dst); err != nil {
 		return err
@@ -27,16 +34,26 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 		dst.Spec.RegistrationDate = src.Spec.VaccineDetails[0].RegistrationDate
 	}
 
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO1", "dst", dst)
+
+	setupLog.Info("ConvertTo ended from v3-->v2 \n\n ")
 	return nil
 }
 
 func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
+	setupLog.Info("ConvertFrom started from v2-->v3 \n\n ")
 	src := srcRaw.(*v2.Registration)
 	if err := Convert_v2_Registration_To_v3_Registration(src, dst, nil); err != nil {
 		return err
 	}
 
 	restored := &Registration{}
+
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO1", "dst", dst)
+	setupLog.Info("CONVERT TO1", "restored", restored)
+
 	if ok, err := UnmarshalData(src, restored); err != nil || !ok {
 		return err
 	}
@@ -49,6 +66,11 @@ func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
 		}}
 	}
 
+	setupLog.Info("CONVERT TO1", "src", src)
+	setupLog.Info("CONVERT TO1", "dst", dst)
+	setupLog.Info("CONVERT TO1", "restored", restored)
+
+	setupLog.Info("\n\n ConvertFrom ended from v2-->v3 \n\n ")
 	return nil
 }
 
