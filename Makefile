@@ -1,4 +1,6 @@
+
 CRD_OPTIONS ?= "crd:trivialVersions=false"
+ROOT_DIR_RELATIVE := .
 
 # Image URL to use all building/pushing image targets
 IMG ?= controller:latest
@@ -7,7 +9,7 @@ ENVTEST_K8S_VERSION = 1.23
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
-GOBIN=$(shell go env GOPATH)/bin
+GOBIN=$(shell go env GOROOT)/bin
 else
 GOBIN=$(shell go env GOBIN)
 endif

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	conv "k8s.io/apimachinery/pkg/conversion"
 	v3 "kube-vaccine/api/v3"
+	"kube-vaccine/util"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 )
@@ -23,7 +24,7 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 	setupLog.Info("CONVERT TO1", "dst", dst)
 	setupLog.Info("CONVERT TO1", "restored", restored)
 
-	ok, err := UnmarshalData(src, restored)
+	ok, err := util.UnmarshalData(src, restored)
 	if err != nil {
 		return err
 	}
@@ -66,7 +67,7 @@ func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
 	setupLog.Info("ConvertFrom1", "dst", dst)
 	setupLog.Info("ConvertFrom1", "src", src)
 
-	if err := MarshalData(src, dst); err != nil {
+	if err := util.MarshalData(src, dst); err != nil {
 		return err
 	}
 
