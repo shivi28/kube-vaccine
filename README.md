@@ -6,7 +6,9 @@ This project demonstrates how to write API conversions for Kubernetes CRDs by ta
 ------
 
 ### Why do we need to do API conversions?
-
+All kubernetes projects contains several APIs that evolves over time and moves to more stable version. This evolution leads to multiple release and keeps updating API server to support latest version. 
+There are clients who also upgrade to latest version with subsequent releases. But what about those clients who still use older versions?
+So to serve them the requested data in older version, k8s API server needs to support older versions also, for that we write API conversion functions that fetches data from API server in latest version and convert it to requested version and serves the client.
 
 ### Write API conversions for kubernetes custom resource "Registration"  
 
