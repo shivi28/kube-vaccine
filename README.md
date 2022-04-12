@@ -1,5 +1,5 @@
 # Kube-Vaccine
-
+![visitor badge](https://visitor-badge.glitch.me/badge?page_id=shivi28.kube-vaccine)
 This project demonstrates how to write API conversions for Kubernetes CRDs by taking a use case of Covid19 Vaccine registration.
 
 ------
@@ -37,21 +37,11 @@ Let's first create v1 API for kind Registration
 ```
 **Output is:** v1 API created with following schema
 ```bash
-type Registration struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   RegistrationSpec   `json:"spec,omitempty"`
-	Status RegistrationStatus `json:"status,omitempty"`
-}
-
 type RegistrationSpec struct {
 	Name             string `json:"name,omitempty"`
 	VerifiedID       string `json:"verified_id,omitempty"`
 	RegistrationDate string `json:"registration_date,omitempty"`
 }
-
-type RegistrationStatus struct {}
 ```
 
 Now create v2 API
@@ -63,7 +53,12 @@ Now create v2 API
 ```
 **Output:**
 ```bash
-
+type RegistrationSpec struct {
+	Name             string `json:"name,omitempty"`
+	VerifiedID       string `json:"verified_id,omitempty"`
+	RegistrationDate string `json:"registration_date,omitempty"`
+	VaccineName      string `json:"vaccine_name,omitempty"`
+}
 ```
 
 At last create v3 API
@@ -74,16 +69,6 @@ At last create v3 API
     Create controller(y/n)  - n  
 ```
 **Output:**
-```bash
-...
-type RegistrationSpec struct {
-	Name             string `json:"name,omitempty"`
-	VerifiedID       string `json:"verified_id,omitempty"`
-	RegistrationDate string `json:"registration_date,omitempty"`
-	VaccineName      string `json:"vaccine_name,omitempty"`
-}
-...
-```
 
 `v3 API contains`
 
