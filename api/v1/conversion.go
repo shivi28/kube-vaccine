@@ -12,7 +12,6 @@ import (
 var setupLog = ctrl.Log.WithName("setup")
 
 func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
-	setupLog.Info("ConvertTo called from v1-->v3 \n\n ")
 	dst := dstRaw.(*v3.Registration)
 
 	if err := Convert_v1_Registration_To_v3_Registration(src, dst, nil); err != nil {
@@ -20,23 +19,11 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 	}
 
 	restored := &v3.Registration{}
-	setupLog.Info("CONVERT TO1", "src", src)
-	setupLog.Info("CONVERT TO1", "dst", dst)
-	setupLog.Info("CONVERT TO1", "restored", restored)
 
 	ok, err := util.UnmarshalData(src, restored)
 	if err != nil {
 		return err
 	}
-
-	//setupLog.Info("CONVERT TO", "key", fmt.Sprintf("2 dst.Spec.Name,dst.Spec.VerifiedID,dst.Spec.RegistrationDate,dst.Spec.VaccineName : %+v %+v %+v %+v", dst.Spec.Name, dst.Spec.VerifiedID, dst.Spec.RegistrationDate, dst.Spec.VaccineName))
-	//setupLog.Info("CONVERT TO", "key", fmt.Sprintf("2 restored.Spec.Name,restored.Spec.VerifiedID,restored.Spec.RegistrationDate,restored.Spec.VaccineName : %+v %+v %+v %+v", restored.Spec.Name, restored.Spec.VerifiedID, restored.Spec.RegistrationDate, restored.Spec.VaccineName))
-	setupLog.Info("CONVERT TO1", "src", src)
-	setupLog.Info("CONVERT TO2", "dst ", dst)
-	setupLog.Info("CONVERT TO2", "restored", restored)
-	//
-	//fmt.Printf("2 dst.Spec.Name,dst.Spec.VerifiedID,dst.Spec.RegistrationDate,dst.Spec.VaccineName : %+v %+v %+v %+v", dst.Spec.Name, dst.Spec.VerifiedID, dst.Spec.RegistrationDate, dst.Spec.VaccineName)
-	//fmt.Printf("2 restored.Spec.Name,restored.Spec.VerifiedID,restored.Spec.RegistrationDate,restored.Spec.VaccineName : %+v %+v %+v %+v", restored.Spec.Name, restored.Spec.VerifiedID, restored.Spec.RegistrationDate, restored.Spec.VaccineName)
 
 	if ok == true {
 		if restored.Spec.VaccineDetails == nil {
@@ -51,21 +38,14 @@ func (src *Registration) ConvertTo(dstRaw conversion.Hub) error {
 			},
 		}
 	}
-
-	setupLog.Info("\n\n ConvertTo called Ended v1-->v3 \n\n ")
-
 	return nil
 }
 
 func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
-	setupLog.Info("ConvertFrom called from v3-->v1 \n\n ")
 	src := srcRaw.(*v3.Registration)
 	if err := Convert_v3_Registration_To_v1_Registration(src, dst, nil); err != nil {
 		return err
 	}
-
-	setupLog.Info("ConvertFrom1", "dst", dst)
-	setupLog.Info("ConvertFrom1", "src", src)
 
 	if err := util.MarshalData(src, dst); err != nil {
 		return err
@@ -76,10 +56,6 @@ func (dst *Registration) ConvertFrom(srcRaw conversion.Hub) error {
 	}
 	dst.Spec.RegistrationDate = src.Spec.VaccineDetails[0].RegistrationDate
 
-	setupLog.Info("ConvertFrom2", "dst", dst)
-	setupLog.Info("ConvertFrom2", "src", src)
-
-	setupLog.Info("\n\nConvertFrom ended from v3-->v1 \n")
 	return nil
 }
 
